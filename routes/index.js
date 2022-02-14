@@ -3,8 +3,8 @@ module.exports = app => {
 
   app.use("/", require("./auth.routes"))
 
-  // const userRouter = require('./user.routes')
-  // app.use('/', userRouter)
+
+  app.use('/', require('./user.routes'))
 
 }
 
