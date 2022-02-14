@@ -12,3 +12,4 @@ router.get('/perfil-usuario/editar', isLoggedIn, (req, res, next) => {
     res.render('users/edit-user-profile', { user: req.session.currentUser })
 })
 
+module.exports = router

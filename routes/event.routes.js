@@ -1,19 +1,20 @@
 const router = require("express").Router()
 const bcryptjs = require('bcryptjs')
 const res = require("express/lib/response")
-const User = require('./../models/Event.model')
+const Event = require('./../models/event.model')
 
 
-router.get('/', (req, res, next) => res.render('index'))
+router.get('/', (req, res, next) => res.render('event/event-list'))
 
 
 //crear evento 
-router.get('/crear', (req,res,next) => res.render ('index'))
+router.get('/crear', (req,res,next) =>    {
 
 Event 
 .find()
 .then( eventos => res.render("event/new-event", {eventos}))
-.catch (err => console.log ("no se encuentra el evento"))
+.catch (err => console.log ("no se encuentra el evento")) 
+})
 
 
 router.post('/crear', (req, res, next) => {

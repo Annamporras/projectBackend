@@ -53,7 +53,7 @@ router.post('/inicio-sesion', (req, res, next) => {
       } else {
         req.session.currentUser = user
         console.log('El objeto de EXPRESS-SESSION', req.session)
-        res.redirect('/perfil')
+        res.redirect('/perfil-usuario')
       }
     })
 })
