@@ -27,6 +27,41 @@ router.post('/registro', (req, res, next) => {
 })
 
 
+//  login 
 
+router.get('/inicio-sesion', (req, res, next) => res.render('auth/login-form'))
+
+// Login form (handle)
+router.post('/inicio-sesion', (req, res, next) => {
+
+  const { email, password } = req.body
+
+  if (email.length === 0 || password.length === 0) {
+    res.render('auth/login-form', { errorMessage: 'Por favor, rellena todos los campos' })
+    return
+  }
+
+  User
+    .findOne({ email })
+    .then(user => {
+      if (!user) {
+        res.render('auth/login-form', { errorMessage: 'Email no registrado en la Base de Datos' })
+        return
+      } else if (bcryptjs.compareSync(password, user.password) === false) {
+        res.render('auth/login-form', { errorMessage: 'La contraseña es incorrecta' })
+        return
+      } else {
+        req.session.currentUser = user
+        console.log('El objeto de EXPRESS-SESSION', req.session)
+        res.redirect('/perfil')
+      }
+    })
+})
+
+
+//cerrar cesion 
+router.post('/cerrar-sesion', (req, res) => {
+  req.session.destroy(() => res.redirect('/inicio-sesion'))
+})
 
 module.exports = router
