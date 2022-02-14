@@ -15,7 +15,7 @@ const commentSchema = new Schema(
 
         owner: {
             type: Schema.Types.ObjectId,
-            ref: 'user' //user & partner roles
+            ref: 'User' //user & partner roles
         }
 
     },

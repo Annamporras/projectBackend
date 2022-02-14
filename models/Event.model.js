@@ -16,24 +16,27 @@ const eventSchema = new Schema(
             required: true,
         },
 
-        time: {
-            type: Number,
-        },
-
         address: {
-            type: String,
-        },
+            street: {
+                type: String,
+                required: true
+            },
 
-        city: {
-            type: String,
-        },
-
-        location: {
-            type: {
+            postCode: {
+                type: Number,
+            },
+            city: {
                 type: String,
             },
-            coordinates: [Number],
+
+            location: {
+                type: {
+                    type: String,
+                },
+                coordinates: [Number],
+            },
         },
+
 
         description: {
             type: String,
@@ -45,19 +48,19 @@ const eventSchema = new Schema(
             type: String,
         },
 
-        participants: {
+        participants: [{
             type: Schema.Types.ObjectId,
-            ref: 'user', //user role
-        },
+            ref: 'User', //user role
+        }],
 
-        comments: {
+        comments: [{
             type: Schema.Types.ObjectId,
-            ref: 'comments',
-        },
+            ref: 'Comment',
+        }],
 
         owner: {
             type: Schema.Types.ObjectId,
-            ref: 'user', //Partner role
+            ref: 'User', //Partner role
         }
     },
     {

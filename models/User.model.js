@@ -41,7 +41,7 @@ const userSchema = new Schema(
 
     category: {
       type: String,
-      enum: ['THEATRE', 'MUSEM', 'ART GALLERY', 'CONCERT HALL', 'BOOKSTORE', 'MULTIDISCIPLINARY SPACE', 'OTHERS'],
+      enum: ['THEATRE', 'MUSEM', 'ART GALLERY', 'CONCERT HALL', 'BOOKSTORE', 'MULTIDISCIPLINARY SPACE', 'OTHERS', 'UNKOWN'],
       default: 'UNKOWN'
     },
 
@@ -49,10 +49,7 @@ const userSchema = new Schema(
       type: String,
     },
 
-    comments: {
-      type: Schema.Types.ObjectId,
-      ref: 'comments',
-    }
+
   }, {
   timestamps: true
 }
