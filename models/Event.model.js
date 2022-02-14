@@ -18,8 +18,15 @@ const eventSchema = new Schema(
 
         address: {
             street: {
+                streetName : {
                 type: String,
                 required: true
+                },
+
+                streetNumber : {
+                type: Number,
+                }
+        
             },
 
             postCode: {
@@ -33,7 +40,10 @@ const eventSchema = new Schema(
                 type: {
                     type: String,
                 },
-                coordinates: [Number],
+                coordinates: { 
+                type:[Number],
+                required: true
+                }
             },
         },
 
