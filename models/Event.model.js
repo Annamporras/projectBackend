@@ -45,20 +45,20 @@ const eventSchema = new Schema(
             type: String,
         },
 
-        participants: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: "User", //user role
-            },
-        ],
-        owner: {
+        participants: {
             type: Schema.Types.ObjectId,
-            ref: "User", //Partner role
+            ref: 'user', //user role
         },
-        comments: [{
+
+        comments: {
             type: Schema.Types.ObjectId,
             ref: 'comments',
-        }]
+        },
+
+        owner: {
+            type: Schema.Types.ObjectId,
+            ref: 'user', //Partner role
+        }
     },
     {
         timestamps: true,

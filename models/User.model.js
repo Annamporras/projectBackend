@@ -1,58 +1,62 @@
 const { Schema, model } = require("mongoose");
 
 
-const userSchema = new Schema({
-  username: {
-    type: String,
-    unique: true,
-    required: true,
-    minlength: 2,
-    maxlength: 20,
-    trim: true
-  },
-  email: {
-    type: String,
-  },
-  password: {
-    type: String,
-    required: true,
-  },
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      unique: true,
+      required: true,
+      minlength: 2,
+      maxlength: 20,
+      trim: true
+    },
 
-  image: {
-    type: String,
-  },
+    email: {
+      type: String,
+    },
 
-  description: {
-    type: String,
-    minlength: 0,
-    maxlength: 150,
-    trim: true,
-  },
+    password: {
+      type: String,
+      required: true,
+    },
 
-  role: {
-    type: String,
-    enum: ['ADMIN', 'PARTNER', 'USER'],
-    default: 'USER',
-    required: true,
-  },
+    image: {
+      type: String,
+    },
 
-  category: [{
-    type: String,
-    default: 'UNKOWN',
-    enum: ['THEATRE', 'MUSEM', 'ART GALLERY', 'CONCERT HALL', 'BOOKSTORE', 'MULTIDISCIPLINARY SPACE', 'OTHERS']
-  }],
-  websiteUrl: {
-    type: String,
-  },
+    description: {
+      type: String,
+      minlength: 0,
+      maxlength: 150,
+      trim: true,
+    },
 
-  comments: [{
-    type: Schema.Types.ObjectId,
-    ref: 'comments',
-  }]
-}, {
+    role: {
+      type: String,
+      enum: ['ADMIN', 'PARTNER', 'USER'],
+      default: 'USER',
+      required: true,
+    },
+
+    category: {
+      type: String,
+      enum: ['THEATRE', 'MUSEM', 'ART GALLERY', 'CONCERT HALL', 'BOOKSTORE', 'MULTIDISCIPLINARY SPACE', 'OTHERS'],
+      default: 'UNKOWN'
+    },
+
+    websiteUrl: {
+      type: String,
+    },
+
+    comments: {
+      type: Schema.Types.ObjectId,
+      ref: 'comments',
+    }
+  }, {
   timestamps: true
 }
-);
+)
 
 
 
