@@ -16,25 +16,20 @@ const eventSchema = new Schema(
             required: true,
         },
 
-        address: {
+        address : {
             street: {
                 streetName : {
                 type: String,
                 required: true
                 },
 
-                streetNumber : {
-                type: Number,
-                }
+                streetNumber :  Number,
         
             },
 
-            postCode: {
-                type: Number,
-            },
-            city: {
-                type: String,
-            },
+            postCode:  Number,
+
+            city: String ,
 
             location: {
                 type: {
@@ -54,9 +49,7 @@ const eventSchema = new Schema(
             trim: true
         },
 
-        image: {
-            type: String,
-        },
+        image: String,
 
         participants: [{
             type: Schema.Types.ObjectId,

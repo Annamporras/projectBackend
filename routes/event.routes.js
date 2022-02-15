@@ -1,33 +1,122 @@
 const router = require("express").Router()
 const bcryptjs = require('bcryptjs')
 const Event = require('./../models/event.model')
+const User = require('./../models/User.model')
+const Comment = require('./../models/Comment.model')
+const fileUploader= require('../config/cloudinary.config')
+const { isLoggedIn } = require("../middleware/route-guard")
+
+// lista de eventos
 
 
-router.get('/', (req, res, next) => res.render('event/event-list'))
-
-
-//crear evento 
-router.get('/crear', (req, res, next) => {
+router.get('/', (req, res, next) => {
 
   Event
     .find()
-    .then(eventos => res.render("event/new-event", { eventos }))
+    .then(eventos => res.render("event/event-list",  {eventos} ))
     .catch(err => console.log("no se encuentra el evento"))
 })
 
 
-router.post('/crear', (req, res, next) => {
+//crear evento 
 
-  const { name, date, address, city, } = req.body
-  const location = { type: 'Point', coordinates: [lat.toString(), lng.toString()] }
+router.get('/crear', (req, res, next) => {res.render("event/new-event")})
+
+router.post('/crear', fileUploader.single('image'),(req, res, next) => {
+    
+    
+    const { name,  date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng,}= req.body;
+    
+    const address = {  
+        
+        street: { 
+            streetName,
+            streetNumber
+        },
+        postCode:postCode,
+        city: city,
+        
+        location :{
+            type: "Point",
+            coordinates: [ lat, lng],
+        }
+    }
+
+    console.log (req.file, req.body, address,)
 
   Event
-    .create({ name, date, address, city, })
-    .then(() => res.redirect('/'))
+    .create({name,  date, description, participants, comments, image: req.file?.path, address })
+    .then(() => res.redirect('/eventos'))
     .catch(err => {
       console.log('Oh! An error occurred when creating event', err)
-      res.render('event/new-event')
+     
     })
 })
+
+  //eventos editar 
+router.get('/editar/:id', isLoggedIn, (req, res, next) => {
+    const { id } = req.params
+
+    Event
+        .findById(id)
+        .then(evento => res.render('event/event-edit-form', evento))
+        .catch(err => console.log(err))
+})
+
+router.post('/editar/:id',isLoggedIn, fileUploader.single('image'), (req, res, next) => {
+    const { id } = req.params
+    const { name,  date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng }= req.body;
+    const address = {  
+        
+        street: { 
+            streetName,
+            streetNumber
+        },
+        postCode:postCode,
+        city: city,
+        
+        location :{
+            type: "Point",
+            coordinates: [ lat, lng],
+        }
+    }
+
+    Event
+        .findByIdAndUpdate(id, { name,  date, description, participants, comments, image: req.file?.path, address   })
+        .then(() => res.redirect(`/eventos`))
+        .catch(err => console.log(err))
+})
+
+
+
+
+// eventos eliminar 
+
+router.post('/:id/delete', isLoggedIn, (req, res, next) => {
+    const { id } = req.params
+
+    Event
+        .findByIdAndDelete(id)
+        .then(() => res.redirect('/eventos'))
+        .catch(err => console.log('Oh! no se pude eliminar evento', err))
+})
+
+
+// ruta a los detalles del evento 
+
+router.get('/detalles/:event_id', (req, res) => {
+
+  const { event_id } = req.params
+
+  Event
+    .findById(event_id)
+    .populate('participants','comments')       // Nombre del campo que se debe popular
+    .then( evento => res.render('event/event-details', {evento}))
+    .catch(err => console.log(err))
+})
+
+// router.post('/detalles/:event_id', (req,res) => {
+//     const { event_id} = req.params
+// })
 
 module.exports = router
