@@ -7,7 +7,7 @@
             <h1>Editar perfil</h1>
             <hr>
 
-            <form action="/perfil-usuario/editar/{{_id}}" method="POST" enctype="multipart/form-data">
+            <form action="colaboradores/perfil/editar/{{_id}}" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="usernameInput" class="form-label">Nombre de usuario</label>
                     <input type="text" class="form-control" id="usernameInput" name="username" value="{{username}}">
@@ -22,6 +22,7 @@
                     <label for="imageInput" class="form-label">Imagen</label>
                     <input type="file" class="form-control" id="imageInput" name="image" value="{{image}}">
                 </div>
+
 
                 <div class="d-grid gap-2">
                     <button type="submit" class="btn btn-dark block">Editar perfil</button>

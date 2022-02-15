@@ -23,6 +23,7 @@ const userSchema = new Schema(
 
     image: {
       type: String,
+      default: 'https://i.stack.imgur.com/l60Hf.png'
     },
 
     description: {

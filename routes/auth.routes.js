@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
     res.render('index')
 })
 
-
+// registro users
 router.get('/registro', (req, res, next) => {
     res.render('auth/signup-form')
 })
@@ -21,6 +21,25 @@ router.post('/registro', (req, res, next) => {
         .then(salt => bcryptjs.hash(password, salt))
         .then(hashedpass => {
             return User.create({ username, email, password: hashedpass })
+        })
+        .then(createdUser => res.redirect('/'))
+        .catch(err => next(err))
+})
+
+//registro partners
+
+router.get('/colaboradores/registro', (req, res, next) => {
+    res.render('auth/partners-signup-form')
+})
+
+router.post('/colaboradores/registro', (req, res, next) => {
+    const { username, email, category, password } = req.body
+
+    bcryptjs
+        .genSalt(saltRounds)
+        .then(salt => bcryptjs.hash(password, salt))
+        .then(hashedpass => {
+            return User.create({ username, email, category, password: hashedpass })
         })
         .then(createdUser => res.redirect('/'))
         .catch(err => next(err))
@@ -53,7 +72,7 @@ router.post('/inicio-sesion', (req, res, next) => {
             } else {
                 req.session.currentUser = user
                 console.log('El objeto de EXPRESS-SESSION', req.session)
-                res.redirect('/perfil-usuario')
+                res.redirect(`/perfil-usuario/${user._id}`)
             }
         })
 })
