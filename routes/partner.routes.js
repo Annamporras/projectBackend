@@ -12,8 +12,8 @@ router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
         .then(user => {
             console.log(req.session.currentUser, user)
             res.render(`partners/partner-profile`,
-                { user },
-                isOwner(req.session.currentUser._id, _id))
+                { user, isOwner: isOwner(req.session.currentUser._id, _id) })
+
         })
         .catch(err => next(err))
 })
@@ -43,7 +43,7 @@ router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
     User
         .find()
-        .then(event => res.render('partners/created-events', { event }))
+        .then(event => res.render('partners/created-events', { event, isOwner: isOwner(req.session.currentUser._id) }))
         .catch(err => next(err))
 
 })

@@ -2,7 +2,7 @@ const router = require("express").Router()
 const fileUploader = require('../config/cloudinary.config');
 const { isLoggedIn } = require("../middleware/route-guard")
 const User = require('./../models/User.model')
-const { isOwner,isAdmin,isPartner,isUser,formatDate} = require ("../utils")
+const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 // router.get('/perfil-usuario', isLoggedIn, (req, res, next) => {
 //     res.render("users/user-profile", { user: req.session.currentUser })
 // })
@@ -12,7 +12,7 @@ router.get('/perfil-usuario/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
     User
         .findById(_id)
-        .then(user => res.render(`users/user-profile`, { user }))
+        .then(user => res.render(`users/user-profile`, { user, isOwner: isOwner(req.session.currentUser._id, _id) }))
         .catch(err => next(err))
 })
 
