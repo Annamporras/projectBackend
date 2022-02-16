@@ -1,19 +1,41 @@
-<h1> detalles del evento</h1>
+<div class="container">
 
+    <div class="row justify-content-center">
 
-<h5> Nombre {{evento.name}} </h5>
-<h5> Fecha {{evento.date}} </h5>
-<h5> Direccion{{evento.address.street.streetName}} </h5>
-<h5> Ciudad {{evento.address.city}} </h5>
-<h5> imagen {{evento.image}}</h5>
+        <div class="col-md-6">
+<br>
+<h1> Detalles del evento</h1>
+
+        </div>
+<h5> Nombre: {{evento.name}} </h5>
+<br>
+<h5> Fecha: {{evento.date}} </h5>
+<br>
+<h5> Direccion: {{evento.address.street.streetName}} </h5>
+<br>
+<h5> Ciudad: {{evento.address.city}} </h5>
+<br>
+<img class = 'imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
 <h5> descripcion {{evento.description}} </h5> 
 <h5> commentarios {{ evento.comments}} </h5>
+{{!-- {{if isOwn}} --}}
 
-
-  <a href="/eventos/editar/{{_id}}" class="btn" style="background-color: #9e2438">Editar</a>
+  <a href="/eventos/editar/{{_id}}" class="btn" style="background-color: #dac3c6">Editar</a>
         <form action="/eventos/{{_id}}/delete" method="POST">
-            <button type="submit" class="btn" style="background-color: #000000;">Borrar lugar</button>
-        </form>
-    </div>
-    <hr>
- 
+            <button type="submit" class="btn" style="background-color: #f0c5c5;">Borrar evento</button>
+         </form>
+         </div>
+          <hr>
+
+          <div class="input-group">
+   {{!-- <span class="input-group-text"> deja aqui tu comentario sobre nuestro evento nos ayuda</span> --}}
+  
+          <br>
+           <form action="/eventos/{{_id}}/comments" method="POST">
+            <button type="submit" class="btn" style="background-color: #dab0b0;">nuevo comentario</button>
+         </form> </div>
+           <textarea class="form-control" aria-label="With textarea"></textarea>
+            </div>
+          </div>
+
+           </div>

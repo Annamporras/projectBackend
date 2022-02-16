@@ -1,9 +1,9 @@
 <h1>soy la lista</h1>
 {{#each eventos}}
-<h5> Nombre {{name}} </h5>
-<h5> Fecha {{date}} </h5>
-<h5> Direccion{{address.street.streetName}} </h5>
-<h5> Ciudad {{address.city}} </h5>
+<h5> Nombre: {{name}} </h5>
+<h5> Fecha: {{date}} </h5>
+<h5> Direccion: {{address.street.streetName}} </h5>
+<h5> Ciudad: {{address.city}} </h5>
 
   <a href="/eventos/editar/{{_id}}" class="btn" style="background-color: #9e2438">Editar</a>
         <form action="/eventos/{{_id}}/delete" method="POST">
