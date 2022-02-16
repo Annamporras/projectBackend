@@ -17,30 +17,44 @@
         <br>
         <img class='imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
         <h5> descripcion {{evento.description}} </h5>
-        <h5> commentarios {{ evento.comments}} </h5>
+
+        {{#each comments}}
+
+        <p>{{this.text}}</p>
+
+        {{/each}}
+
+        {{!-- {{if isOwn}} --}}
 
 
-        {{#if isOwner}}
-        <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
-        <form action="/eventos/{{evento._id}}/delete" method="POST">
-            <button type="submit" class="btn btn-dark d-grid gap-2 col-6">Borrar lugar</button>
+        <a href="/eventos/editar/{{_id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
+        <form action="/eventos/{{_id}}/delete" method="POST">
+            <button type="submit" class="btn btn-dark d-grid gap-2 col-6">Borrar evento</button>
         </form>
 
-        {{/if}}
+
+
     </div>
     <hr>
 
+    {{!-- //formulario comentarios --}}
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+        <form action="/eventos/detalles/{{evento._id}}/comments" method="POST">
+            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
+            <button type="submit" class="btn btn-dark"> comentar </button>
+        </form>
     </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+
+
+    {{!-- //formulario asistire --}}
+    <div classs="mb-3">
+        <form action="/eventos/detalles/{{evento._id}}/participants" method="POST">
+            <button type="submit" class="btn btn-dark"> asistiré </button>
+        </form>
+
     </div>
-    <form action="/eventos/{{_id}}/comments" method="POST">
-        <button type="submit" class="btn btn-dark"> comentar </button>
-    </form>
+
 
     <div>
         <figure id="myMap">
