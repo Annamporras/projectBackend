@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 function isOwner(currentUser, thingToCheck) {
-    return currentUser === thingToCheck ? true : false
+    return currentUser == thingToCheck ? true : false
 }
 const isAdmin = user => user.role === 'ADMIN'
 const isPartner = user => user.role === 'PARTNER'
