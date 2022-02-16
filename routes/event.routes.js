@@ -3,58 +3,58 @@ const bcryptjs = require('bcryptjs')
 const Event = require('./../models/event.model')
 const User = require('./../models/User.model')
 const Comment = require('./../models/Comment.model')
-const fileUploader= require('../config/cloudinary.config')
+const fileUploader = require('../config/cloudinary.config')
 const { isLoggedIn } = require("../middleware/route-guard")
-const { isOwner,isAdmin,isPartner,isUser,formatDate} = require ("../utils")
+const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 
 // lista de eventos
 
 
 router.get('/', (req, res, next) => {
 
-  Event
-    .find()
-    .then(eventos => res.render("event/event-list",  {eventos} ))
-    .catch(err => console.log("no se encuentra el evento"))
+    Event
+        .find()
+        .then(eventos => res.render("event/event-list", { eventos }))
+        .catch(err => console.log("no se encuentra el evento"))
 })
 
 
 //crear evento 
 
-router.get('/crear', (req, res, next) => {res.render("event/new-event")})
+router.get('/crear', (req, res, next) => { res.render("event/new-event") })
 
-router.post('/crear', fileUploader.single('image'),(req, res, next) => {
-    
-    
-    const { name,  date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng,}= req.body;
-    
-    const address = {  
-        
-        street: { 
+router.post('/crear', fileUploader.single('image'), (req, res, next) => {
+
+
+    const { name, date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng, } = req.body;
+
+    const address = {
+
+        street: {
             streetName,
             streetNumber
         },
-        postCode:postCode,
+        postCode: postCode,
         city: city,
-        
-        location :{
+
+        location: {
             type: "Point",
-            coordinates: [ lat, lng],
+            coordinates: [lat, lng],
         }
     }
 
-    console.log (req.file, req.body, address,)
+    console.log(req.file, req.body, address,)
 
-  Event
-    .create({name,  date, description, participants, comments, image: req.file?.path, address })
-    .then(() => res.redirect('/eventos'))
-    .catch(err => {
-      console.log('Oh! An error occurred when creating event', err)
-     
-    })
+    Event
+        .create({ name, date, description, participants, comments, image: req.file?.path, address })
+        .then(() => res.redirect('/eventos'))
+        .catch(err => {
+            console.log('Oh! An error occurred when creating event', err)
+
+        })
 })
 
-  //eventos editar 
+//eventos editar 
 router.get('/editar/:id', isLoggedIn, (req, res, next) => {
     const { id } = req.params
 
@@ -64,26 +64,26 @@ router.get('/editar/:id', isLoggedIn, (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.post('/editar/:id',isLoggedIn, fileUploader.single('image'), (req, res, next) => {
+router.post('/editar/:id', isLoggedIn, fileUploader.single('image'), (req, res, next) => {
     const { id } = req.params
-    const { name,  date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng }= req.body;
-    const address = {  
-        
-        street: { 
+    const { name, date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng } = req.body;
+    const address = {
+
+        street: {
             streetName,
             streetNumber
         },
-        postCode:postCode,
+        postCode: postCode,
         city: city,
-        
-        location :{
+
+        location: {
             type: "Point",
-            coordinates: [ lat, lng],
+            coordinates: [lat, lng],
         }
     }
 
     Event
-        .findByIdAndUpdate(id, { name,  date, description, participants, comments, image: req.file?.path, address   })
+        .findByIdAndUpdate(id, { name, date, description, participants, comments, image: req.file?.path, address })
         .then(() => res.redirect(`/eventos`))
         .catch(err => console.log(err))
 })
@@ -108,13 +108,13 @@ router.post('/:id/delete', isLoggedIn, (req, res, next) => {
 router.get('/detalles/:event_id', (req, res) => {
 
 
-  const { event_id } = req.params
+    const { event_id } = req.params
 
-  Event
-    .findById(event_id)
-    .populate('participants','comments')       // Nombre del campo que se debe popular
-    .then( evento => res.render('event/event-details', {evento}, isOwner(req.session.currentUser._id, evento.owner),formatDate(evento.date)))
-    .catch(err => console.log(err))
+    Event
+        .findById(event_id)
+        .populate('participants', 'comments')       // Nombre del campo que se debe popular
+        .then(evento => res.render('event/event-details', { evento }, isOwner(req.session.currentUser._id, evento.owner), formatDate(evento.date)))
+        .catch(err => console.log(err))
 })
 
 //routa post para el comentario 

@@ -13,3 +13,8 @@ h1 {
 .imagenPerfil{
   width: 30%;
 }
+
+#myMap{
+  background-color: red;
+  height: 300px;
+}
