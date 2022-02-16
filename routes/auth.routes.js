@@ -79,11 +79,17 @@ router.post('/inicio-sesion', (req, res, next) => {
             //     req.session.currentUser = user
             //     console.log('El objeto de EXPRESS-SESSION', req.session)
             //     res.redirect(`/colaboradores/perfil/${user._id}`, isOwner(req.session.currentUser, user))
+            
             //    if (req.session.currentUser.role === 'USER')
-            } else {
+            } else  {
                 req.session.currentUser = user
-                console.log('El objeto de EXPRESS-SESSION', req.session)
-                res.redirect(`/perfil-usuario/${user._id}`)
+                if(req.session.currentUser.role === 'PARTNER'){
+                    res.redirect(`/colaboradores/perfil/${user._id}`)
+                } else if(req.session.currentUser.role === 'USER'){
+                    res.redirect(`/perfil-usuario/${user._id}`)
+                }
+                // console.log(req.session.currentUser)
+                // console.log('El objeto de EXPRESS-SESSION', req.session)
             } 
         })
 })
