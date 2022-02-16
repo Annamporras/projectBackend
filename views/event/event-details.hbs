@@ -6,14 +6,13 @@
 <h5> Direccion{{evento.address.street.streetName}} </h5>
 <h5> Ciudad {{evento.address.city}} </h5>
 <h5> imagen {{evento.image}}</h5>
-<h5> descripcion {{evento.description}} </h5> 
+<h5> descripcion {{evento.description}} </h5>
 <h5> commentarios {{ evento.comments}} </h5>
 
 
-  <a href="/eventos/editar/{{_id}}" class="btn" style="background-color: #9e2438">Editar</a>
-        <form action="/eventos/{{_id}}/delete" method="POST">
-            <button type="submit" class="btn" style="background-color: #000000;">Borrar lugar</button>
-        </form>
-    </div>
-    <hr>
- 
+<a href="/eventos/editar/{{_id}}" class="btn btn-danger">Editar</a>
+<form action="/eventos/{{_id}}/delete" method="POST">
+    <button type="submit" class="btn btn-dark">Borrar lugar</button>
+</form>
+</div>
+<hr>

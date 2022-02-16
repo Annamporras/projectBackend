@@ -6,7 +6,8 @@
     <p>Mi email: {{user.email}}</p>
     <p>Imagen de perfil</p>
     <img class='imagenPerfil' src="{{user.image}}" alt="imagen de perfil">
-
-    <a href="colaboradores/perfil/editar/{{user._id}}">Editar perfil</a>
-    <a href="colaboradores/mis-eventos">Mis eventos</a>
+    <p>Tipo de espacio: {{user.category}}</p>
+    <a class="btn btn-outline-dark" href="colaboradores/perfil/editar/{{user._id}}">Editar perfil</a>
+    <a class="btn btn-outline-dark" href="eventos/crear">Crear Evento</a>
+    <a class="btn btn-outline-dark" href="colaboradores/mis-eventos">Mis eventos</a>
 </div>

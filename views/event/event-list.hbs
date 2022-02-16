@@ -5,11 +5,11 @@
 <h5> Direccion{{address.street.streetName}} </h5>
 <h5> Ciudad {{address.city}} </h5>
 
-  <a href="/eventos/editar/{{_id}}" class="btn" style="background-color: #9e2438">Editar</a>
-        <form action="/eventos/{{_id}}/delete" method="POST">
-            <button type="submit" class="btn" style="background-color: #000000;">Borrar lugar</button>
-        </form>
-  <a href="/eventos/detalles/{{_id}}" class="btn" style="background-color: #9e2438">detalles</a>
-    </div>
-    <hr>
- {{/each}}
+<a href="/eventos/editar/{{_id}}" class="btn btn-outline-dark">Editar</a>
+<form action="/eventos/{{_id}}/delete" method="POST">
+  <button type="submit" class="btn btn-outline-danger">Borrar lugar</button>
+</form>
+<a href="/eventos/detalles/{{_id}}" class="btn btn-outline-dark">detalles</a>
+</div>
+<hr>
+{{/each}}

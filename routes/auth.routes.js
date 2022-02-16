@@ -4,9 +4,6 @@ const bcryptjs = require('bcryptjs')
 const User = require('./../models/User.model')
 const saltRounds = 10
 
-router.get('/', (req, res, next) => {
-    res.render('index')
-})
 
 // registro users
 router.get('/registro', (req, res, next) => {

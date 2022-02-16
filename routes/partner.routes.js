@@ -4,10 +4,13 @@ const { isLoggedIn } = require("../middleware/route-guard")
 const User = require('./../models/User.model')
 
 
-router.get('/perfil', isLoggedIn, (req, res, next) => {
-    res.render("partners/partner-profile", { user: req.session.currentUser })
+router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
+    const { _id } = req.params
+    User
+        .findById(_id)
+        .then(user => res.render(`partners/partner-profile`, { user }))
+        .catch(err => next(err))
 })
-
 router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
 
