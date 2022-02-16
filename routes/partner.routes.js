@@ -11,9 +11,8 @@ router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
         .findById(_id)
         .then(user => {
             console.log(req.session.currentUser, user)
-            res.render(`partners/partner-profile`,
-                { user },
-                isOwner(req.session.currentUser._id, _id))
+            res.render(`partners/partner-profile`, 
+            {user, isOwner: isOwner(req.session.currentUser._id, _id)})
         })
         .catch(err => next(err))
 })

@@ -21,7 +21,7 @@ router.get('/', (req, res, next) => {
 
 //crear evento 
 
-router.get('/crear', (req, res, next) => { res.render("event/new-event") })
+router.get('/crear', isLoggedIn, (req, res, next) => { res.render("event/new-event") })
 
 router.post('/crear', fileUploader.single('image'), (req, res, next) => {
 
@@ -60,7 +60,7 @@ router.get('/editar/:id', isLoggedIn, (req, res, next) => {
 
     Event
         .findById(id)
-        .then(evento => res.render('event/event-edit-form', evento))
+        .then(evento => res.render('event/event-edit-form', evento, {user, isOwner: isOwner(req.session.currentUser._id, _id)}))
         .catch(err => console.log(err))
 })
 
