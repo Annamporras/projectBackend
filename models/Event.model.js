@@ -56,10 +56,10 @@ const eventSchema = new Schema(
             ref: 'User', //user role
         }],
 
-        comments: [{
-            type: Schema.Types.ObjectId,
-            ref: 'Comment',
-        }],
+        // comments: [{
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Comment',
+        // }],
 
         owner: {
             type: Schema.Types.ObjectId,

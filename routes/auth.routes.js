@@ -75,13 +75,7 @@ router.post('/inicio-sesion', (req, res, next) => {
                 res.render('auth/login-form', { errorMessage: 'La contraseña es incorrecta' })
                 return
 
-                // }
-                //  else if (req.session.currentUser.role === 'PARTNER') {
-                //     req.session.currentUser = user
-                //     console.log('El objeto de EXPRESS-SESSION', req.session)
-                //     res.redirect(`/colaboradores/perfil/${user._id}`, isOwner(req.session.currentUser, user))
-
-                //    if (req.session.currentUser.role === 'USER')
+               
             } else {
                 req.session.currentUser = user
                 if (req.session.currentUser.role === 'PARTNER') {

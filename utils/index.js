@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const isAdmin = user => user.role === 'ADMIN'
 const isPartner= user => user.role === 'PARTNER'
 const isUser= user => user.role === 'USER'
+
 const formatDate = date => {
     let month = '' + (date.getMonth() + 1)
     let day = '' + date.getDate()

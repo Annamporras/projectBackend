@@ -106,22 +106,33 @@ router.post('/:id/delete', isLoggedIn, (req, res, next) => {
 // ruta a los detalles del evento 
 
 router.get('/detalles/:event_id', (req, res) => {
-
-
     const { event_id } = req.params
 
-    Event
-        .findById(event_id)
-        .populate('participants', 'comments')       // Nombre del campo que se debe popular
-        .then(evento => res.render('event/event-details', { evento }, isOwner(req.session.currentUser._id, evento.owner), formatDate(evento.date)))
-        .catch(err => console.log(err))
+    const EventPromise = Event.findById(event_id).populate('participants', 'comments')
+    const CommentPromise = Comment.find({event: event_id})
+
+    Promise.all([EventPromise, CommentPromise]).then(values => {
+        const evento = values[0]
+        const comments = values[1]
+
+        res.render('event/event-details', { evento, comments }, 
+        isOwner(req.session.currentUser._id, evento.owner))
+    })
+    .catch(err => console.log(err))
 })
 
-//routa post para el comentario 
 
-// router.post('/detalles/:event_id'/comments, isLoggedIn, (req,res) => {
-//     const { event_id} = req.params
-// })
+// routa post para el comentario 
+
+router.post('/detalles/:event_id/comments', isLoggedIn, (req,res) => {
+    const { event_id} = req.params
+
+    const {text} = req.body
+
+    Comment.create({text, event: event_id, owner: req.session.currentUser._id})
+    .then(() => res.redirect(`/eventos/detalles/${event_id}`))
+
+})
 
 
 //routa post para asistir al evento 

@@ -12,8 +12,6 @@ function drawMap() {
     }
     const mapInstance = new google.maps.Map(document.querySelector('#myMap'), options)
 }
-<<<<<<< HEAD
-=======
 
 const myMarker = new google.maps.Marker({
   position: {
@@ -23,4 +21,3 @@ const myMarker = new google.maps.Marker({
   map: map,
   title: "I'm here"
 });
->>>>>>> 3c91212bf0cdcdfa868dd366e3f6048c9c4e1ad2
