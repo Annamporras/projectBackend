@@ -86,6 +86,8 @@ router.post('/inicio-sesion', (req, res, next) => {
                 req.session.currentUser = user
                 if (req.session.currentUser.role === 'PARTNER') {
                     res.redirect(`/colaboradores/perfil/${user._id}`)
+                } else if (req.session.currentUser.role === 'ADMIN') {
+                    res.redirect(`/admin`)
                 } else if (req.session.currentUser.role === 'USER') {
                     res.redirect(`/perfil-usuario/${user._id}`)
                 }

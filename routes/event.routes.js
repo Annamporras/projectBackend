@@ -46,7 +46,7 @@ router.post('/crear', fileUploader.single('image'), (req, res, next) => {
     console.log(req.file, req.body, address,)
 
     Event
-        .create({ name, date, description, participants, comments, image: req.file?.path, address })
+        .create({ name, date, description, participants, comments, image: req.file?.path, address, owner: req.session.currentUser._id })
         .then(() => res.redirect('/eventos'))
         .catch(err => {
             console.log('Oh! An error occurred when creating event', err)
@@ -113,7 +113,13 @@ router.get('/detalles/:event_id', (req, res) => {
     Event
         .findById(event_id)
         .populate('participants', 'comments')       // Nombre del campo que se debe popular
-        .then(evento => res.render('event/event-details', { evento }, isOwner(req.session.currentUser._id, evento.owner), formatDate(evento.date)))
+        .then(evento => {
+
+            res.render('event/event-details',
+                { evento },
+                // isOwner(req.session.currentUser._id, evento.owner),
+                formatDate(evento.date))
+        })
         .catch(err => console.log(err))
 })
 

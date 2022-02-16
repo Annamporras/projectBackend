@@ -18,15 +18,15 @@
         <img class='imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
         <h5> descripcion {{evento.description}} </h5>
         <h5> commentarios {{ evento.comments}} </h5>
-        {{!-- {{if isOwn}} --}}
 
 
-        <a href="/eventos/editar/{{_id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
-        <form action="/eventos/{{_id}}/delete" method="POST">
+        {{#if isOwner}}
+        <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
+        <form action="/eventos/{{evento._id}}/delete" method="POST">
             <button type="submit" class="btn btn-dark d-grid gap-2 col-6">Borrar lugar</button>
         </form>
 
-
+        {{/if}}
     </div>
     <hr>
 

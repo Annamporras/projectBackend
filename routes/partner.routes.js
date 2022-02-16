@@ -2,14 +2,19 @@ const router = require("express").Router()
 const fileUploader = require('../config/cloudinary.config');
 const { isLoggedIn } = require("../middleware/route-guard")
 const User = require('./../models/User.model')
-const { isOwner,isAdmin,isPartner,isUser,formatDate} = require ("../utils")
+const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 
 
 router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
     User
         .findById(_id)
-        .then(user => res.render(`partners/partner-profile`, { user }))
+        .then(user => {
+            console.log(req.session.currentUser, user)
+            res.render(`partners/partner-profile`,
+                { user },
+                isOwner(req.session.currentUser._id, _id))
+        })
         .catch(err => next(err))
 })
 router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
@@ -34,11 +39,11 @@ router.post('/perfil/editar/:_id', isLoggedIn, fileUploader.single('image'), (re
 
 })
 
-router.get('colaboradores/mis-eventos', isLoggedIn, (req, res, next) => {
+router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
     User
         .find()
-        .then(() => res.render('partners/created-events'))
+        .then(event => res.render('partners/created-events', { event }))
         .catch(err => next(err))
 
 })
