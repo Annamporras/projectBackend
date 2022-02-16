@@ -1,18 +1,29 @@
-<h1> detalles del evento</h1>
+<div class="container">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-6">
+            <br>
+            <h1> Detalles del evento</h1>
+
+        </div>
+        <h5> Nombre: {{evento.name}} </h5>
+        <br>
+        <h5> Fecha: {{evento.date}} </h5>
+        <br>
+        <h5> Direccion: {{evento.address.street.streetName}} </h5>
+        <br>
+        <h5> Ciudad: {{evento.address.city}} </h5>
+        <br>
+        <img class='imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
+        <h5> descripcion {{evento.description}} </h5>
+        <h5> commentarios {{ evento.comments}} </h5>
+        {{!-- {{if isOwn}} --}}
 
 
-<h5> Nombre {{evento.name}} </h5>
-<h5> Fecha {{evento.date}} </h5>
-<h5> Direccion{{evento.address.street.streetName}} </h5>
-<h5> Ciudad {{evento.address.city}} </h5>
-<h5> imagen {{evento.image}}</h5>
-<h5> descripcion {{evento.description}} </h5>
-<h5> commentarios {{ evento.comments}} </h5>
-
-
-<a href="/eventos/editar/{{_id}}" class="btn btn-danger">Editar</a>
-<form action="/eventos/{{_id}}/delete" method="POST">
-    <button type="submit" class="btn btn-dark">Borrar lugar</button>
-</form>
-</div>
-<hr>
+        <a href="/eventos/editar/{{_id}}" class="btn btn-danger">Editar</a>
+        <form action="/eventos/{{_id}}/delete" method="POST">
+            <button type="submit" class="btn btn-dark">Borrar lugar</button>
+        </form>
+    </div>
+    <hr>

@@ -3,6 +3,7 @@ const bcryptjs = require('bcryptjs')
 
 const User = require('./../models/User.model')
 const saltRounds = 10
+const { isOwner,isAdmin,isPartner,isUser,formatDate} = require ("../utils")
 
 
 // registro users
@@ -31,12 +32,14 @@ router.get('/colaboradores/registro', (req, res, next) => {
 
 router.post('/colaboradores/registro', (req, res, next) => {
     const { username, email, category, password } = req.body
+//TODO const role equal PARTNER
 
+    const role = 'PARTNER'
     bcryptjs
         .genSalt(saltRounds)
         .then(salt => bcryptjs.hash(password, salt))
         .then(hashedpass => {
-            return User.create({ username, email, category, password: hashedpass })
+            return User.create({ username, email, category, password: hashedpass, role })
         })
         .then(createdUser => res.redirect('/'))
         .catch(err => next(err))
@@ -47,10 +50,14 @@ router.post('/colaboradores/registro', (req, res, next) => {
 
 router.get('/inicio-sesion', (req, res, next) => res.render('auth/login-form'))
 
+
+// TODO redirect to user profile or partner profile (check roles)
 // Login form (handle)
 router.post('/inicio-sesion', (req, res, next) => {
 
     const { email, password } = req.body
+
+
 
     if (email.length === 0 || password.length === 0) {
         res.render('auth/login-form', { errorMessage: 'Por favor, rellena todos los campos' })
@@ -66,11 +73,18 @@ router.post('/inicio-sesion', (req, res, next) => {
             } else if (bcryptjs.compareSync(password, user.password) === false) {
                 res.render('auth/login-form', { errorMessage: 'La contraseña es incorrecta' })
                 return
+            
+            // }
+            //  else if (req.session.currentUser.role === 'PARTNER') {
+            //     req.session.currentUser = user
+            //     console.log('El objeto de EXPRESS-SESSION', req.session)
+            //     res.redirect(`/colaboradores/perfil/${user._id}`, isOwner(req.session.currentUser, user))
+            //    if (req.session.currentUser.role === 'USER')
             } else {
                 req.session.currentUser = user
                 console.log('El objeto de EXPRESS-SESSION', req.session)
                 res.redirect(`/perfil-usuario/${user._id}`)
-            }
+            } 
         })
 })
 
