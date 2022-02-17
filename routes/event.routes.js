@@ -118,11 +118,16 @@ router.get('/detalles/:event_id', (req, res) => {
         const evento = values[0]
         const comments = values[1]
 
-        res.render('event/event-details', { evento, comments, isOwner: isOwner(req.session.currentUser._id, evento.owner) },
-        )
+        res.render('event/event-details', {
+            evento, comments,
+            isOwner: isOwner(req.session.currentUser._id, evento.owner),
+            isUser: isUser(req.session.currentUser),
+            isPartner: isPartner(req.session.currentUser)
+        })
     })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
 })
+
 
 
 // routa post para el comentario 

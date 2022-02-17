@@ -22,9 +22,7 @@
          </button>
          <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-               <li class="nav-item">
-                  <a class="nav-link" href="/">Inicio</a>
-               </li>
+
                <li class="nav-item">
                   <a class="nav-link" href="/registro">Registro</a>
                </li>
@@ -38,20 +36,20 @@
                </li>
 
                <li class="nav-item">
-                  <a class="nav-link" href="/eventos">eventos </a>
+                  <a class="nav-link" href="/eventos">Eventos</a>
                </li>
                {{!-- //perfil colaborador --}}
                <li class="nav-item">
-                  <a class="nav-link" href="/perfil-usuario/{{currentUserLogged._id}}"> mi perfil </a>
+                  <a class="nav-link" href="/perfil-usuario/{{currentUserLogged._id}}"> Mi perfil </a>
                </li>
 
                <li class="nav-item">
-                  <a class="nav-link" href="#">{{currentUserLogged.username}}Hola</a>
+                  <a class="nav-link" href="#">Hola{{currentUserLogged.username}}</a>
                </li>
 
                <li class="nav-item">
                   <form action="/cerrar-sesion" method="POST">
-                     <button class="nav-link">Logout</button>
+                     <button class="nav-link btn btn-outline-danger">Logout</button>
                   </form>
                </li>
          </div>
