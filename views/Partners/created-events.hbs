@@ -1,9 +1,9 @@
 <div class="container">
 
     <h1>eventos creados</h1>
-    {{#each event}}
+    {{#each filteredEvents}}
 
-    <h5> Nombre: {{event.name}} </h5>
+    <h5> Nombre: {{this.name}} </h5>
 
     {{/each}}
 

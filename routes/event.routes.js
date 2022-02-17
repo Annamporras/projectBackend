@@ -1,7 +1,6 @@
 const router = require("express").Router()
 const bcryptjs = require('bcryptjs')
 const Event = require('./../models/event.model')
-const User = require('./../models/User.model')
 const Comment = require('./../models/Comment.model')
 const fileUploader = require('../config/cloudinary.config')
 const { isLoggedIn } = require("../middleware/route-guard")
@@ -117,8 +116,9 @@ router.get('/detalles/:event_id', (req, res) => {
     Promise.all([EventPromise, CommentPromise]).then(values => {
         const evento = values[0]
         const comments = values[1]
+        let counter = evento.participants.length
 
-        res.render('event/event-details', { evento, comments, isOwner: isOwner(req.session.currentUser._id, evento.owner) },
+        res.render('event/event-details', { evento, comments, isOwner: isOwner(req.session.currentUser._id, evento.owner), counter },
         )
     })
         .catch(err => console.log(err))
@@ -142,8 +142,7 @@ router.post('/detalles/:event_id/comments', isLoggedIn, (req, res) => {
 
 router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
     const { event_id } = req.params
-    const { participant } = req.session.currentUser._id
-    // const {  } = req.body
+    const participant = req.session.currentUser._id
 
     Event
         .findByIdAndUpdate(
@@ -152,15 +151,22 @@ router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
             { new: true }
         )
         //TODO add participant counter, send event to view detalles evento
-        .then(
-            // let counter = arr.length
-        )
+        .then(event => { res.redirect(`/eventos/detalles/${event_id}`)})
 
 
+})
 
+router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
+    Event
+        .find()
+        .then(events =>{
+            let filteredEvents = events.filter(event => event.owner == req.session.currentUser._id)
+            console.log(filteredEvents);
+            res.render('partners/created-events', { filteredEvents })
 
-
+        } )
+        .catch(err=>console.log(err))
 
 })
 
