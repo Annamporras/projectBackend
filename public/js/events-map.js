@@ -1,3 +1,5 @@
+let map
+
 function initMap() {
 
     drawMap()
@@ -13,15 +15,18 @@ function drawMap() {
     }
     const mapInstance = new google.maps.Map(document.querySelector('#myMap'), options)
 }
+
+
 function printMarker() {
-    const { Marker } = google.maps
-    const inputs = document.querySelectorAll  //('.d-none input')  // pinta cordenadas trasnspartes
 
-    const latitude = Number(inputs[0].value)
-    const longitude = Number(inputs[1].value)
+    const inputs = document.querySelectorAll('.location')
 
-    new Marker({
-        map, // pintar la chincheta dentro del mapa centrado con las mismas coordenadas
+    const latitude = Number(inputs[0])
+    const longitude = Number(inputs[1])
+    console.log(latitude, longitude)
+
+    const marker = new google.maps.Marker({
+        map,
         position: { lat: latitude, lng: longitude }
     })
 }

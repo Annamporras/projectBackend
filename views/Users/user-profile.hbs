@@ -1,5 +1,5 @@
 <div class="container">
-
+    <br><br>
 
     <h1>Hola {{user.username}}</h1>
 
@@ -11,7 +11,7 @@
     <p>Tipo de espacio: {{user.category}}</p>
     <p>Espacio web: {{user.websiteUrl}}</p>
     {{/if}}
-
+    <br>
     {{#if isOwner}}
     {{#if isUser }}
     <a class='btn btn-outline-dark' href="/perfil-usuario/editar/{{user._id}}">Editar perfil</a>

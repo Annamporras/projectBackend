@@ -19,7 +19,7 @@ router.get('/perfil-usuario/:_id', isLoggedIn, (req, res, next) => {
                 user,
                 isUser: isUser(req.session.currentUser),
                 isOwner: isOwner(req.session.currentUser._id, _id),
-                isPartner: isPartner(user)
+                isPartner: isPartner(user),
             })
         })
         .catch(err => next(err))

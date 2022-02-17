@@ -15,36 +15,39 @@
         <br>
         <h5> Ciudad: {{evento.address.city}} </h5>
         <br>
-        <img class='imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
+        <img class='imagenEvento' src="{{evento.image}}" alt="imagen del evento"></img>
         <h5> descripcion {{evento.description}} </h5>
+        <br><br>
 
-        {{#each comments}}
-
-        <p>{{this.text}}</p>
-
-        {{/each}}
 
         {{!-- {{if isOwn}} --}}
-
-
-        <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
-        <form action="/eventos/{{evento._id}}/delete" method="POST">
-            <button type="submit" class="btn btn-dark d-grid gap-2 col-6">Borrar evento</button>
-        </form>
-
-
-
+        <br><br>
     </div>
+    <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-3">Editar</a>
+    <form action="/eventos/{{evento._id}}/delete" method="POST">
+        <button type="submit" class="btn btn-dark d-grid gap-2 col-3">Borrar evento</button>
+    </form>
+
+
+
+
     <hr>
 
     {{!-- //formulario comentarios --}}
     <div class="mb-3">
         <form action="/eventos/detalles/{{evento._id}}/comments" method="POST">
-            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+            <label for="exampleFormControlTextarea1" class="form-label">Deja tu comentario</label>
             <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text"></textarea>
             <button type="submit" class="btn btn-dark"> comentar </button>
         </form>
     </div>
+
+    {{#each comments}}
+
+    <p>{{this.text}}</p>
+
+    {{/each}}
+
 
 
     {{!-- //formulario asistire --}}
@@ -66,10 +69,9 @@
 
         </form>
     </center>
+    <br><br>
 
-    {{!-- <a href="javascript:clickLink();"> asistiré</a>
-    <p>Clicks <span id="clicks">0</span></p>
-    <a href="javascript:Reset();">Reset</a> --}}
+
 
     <div>
         <figure id="myMap">

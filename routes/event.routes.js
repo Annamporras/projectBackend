@@ -161,13 +161,7 @@ router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
 
 
 
-    // function incrementClick() {
-    //     updateDisplay(++counterVal);
-    // }
 
-    // function updateDisplay(val) {
-    //     document.getElementById("counter-label").innerHTML = val;
-    // }
 })
 
 
