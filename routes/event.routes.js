@@ -144,15 +144,8 @@ router.post('/detalles/:event_id/comments', isLoggedIn, (req, res) => {
 // const { event_id} = req.params })
 
 
-let counterVal = 0;
+// let counterVal = 0;
 
-function incrementClick() {
-    updateDisplay(++counterVal);
-}
-
-function updateDisplay(val) {
-    document.getElementById("counter-label").innerHTML = val;
-}
 
 
 
