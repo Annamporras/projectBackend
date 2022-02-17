@@ -10,6 +10,8 @@ const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 // lista de eventos
 
 
+
+
 router.get('/', (req, res, next) => {
 
     Event
