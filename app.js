@@ -13,7 +13,7 @@ require("./config")(app);
 require('./config/session.config')(app)
 
 app.locals.appTitle = `Backend Project`;
-
+app.locals.currentUserLogged
 
 // 👇 Start handling routes here
 require('./routes')(app)

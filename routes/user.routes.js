@@ -10,9 +10,18 @@ const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 
 router.get('/perfil-usuario/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
+
+
     User
         .findById(_id)
-        .then(user => res.render(`users/user-profile`, { user, isOwner: isOwner(req.session.currentUser._id, _id) }))
+        .then(user => {
+            res.render(`users/user-profile`, {
+                user,
+                isUser: isUser(req.session.currentUser),
+                isOwner: isOwner(req.session.currentUser._id, _id),
+                isPartner: isPartner(user)
+            })
+        })
         .catch(err => next(err))
 })
 

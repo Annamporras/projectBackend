@@ -140,20 +140,35 @@ router.post('/detalles/:event_id/comments', isLoggedIn, (req, res) => {
 
 // routa post para asistir al evento 
 
-// router.post('/detalles/:event_id'/participants, isLoggedIn, (req,res) => {
-// const { event_id} = req.params })
+router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
+    const { event_id } = req.params
+    const { participant } = req.session.currentUser._id
+    // const {  } = req.body
+
+    Event
+        .findByIdAndUpdate(
+            event_id,
+            { $push: { participants: participant } },
+            { new: true }
+        )
+        //TODO add participant counter, send event to view detalles evento
+        .then(
+            // let counter = arr.length
+        )
 
 
-let counterVal = 0;
 
-function incrementClick() {
-    updateDisplay(++counterVal);
-}
 
-function updateDisplay(val) {
-    document.getElementById("counter-label").innerHTML = val;
-}
 
+
+    // function incrementClick() {
+    //     updateDisplay(++counterVal);
+    // }
+
+    // function updateDisplay(val) {
+    //     document.getElementById("counter-label").innerHTML = val;
+    // }
+})
 
 
 

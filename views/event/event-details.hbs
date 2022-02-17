@@ -54,20 +54,22 @@
         </form>
 
     </div> --}}
-    
-<div>
-    <center><h3 id="counter-label">0</h3></center>
-</div>
-<center>
-    <div>
-        <button onclick="incrementClick()" class="btn btn-dark"> ASISTIRE </button>
-       
-    </div>
-</center>
 
- {{!-- <a href="javascript:clickLink();"> asistiré</a>
-        <p>Clicks <span id="clicks">0</span></p>
-        <a href="javascript:Reset();">Reset</a> --}}
+    <div>
+        <center>
+            <h3 id="counter-label">0</h3>
+        </center>
+    </div>
+    <center>
+        <form action="/eventos/detalles/{{evento._id}}/participants" method="POST">
+            <button id='buttonClick' class="btn btn-dark"> ASISTIRE </button>
+
+        </form>
+    </center>
+
+    {{!-- <a href="javascript:clickLink();"> asistiré</a>
+    <p>Clicks <span id="clicks">0</span></p>
+    <a href="javascript:Reset();">Reset</a> --}}
 
     <div>
         <figure id="myMap">

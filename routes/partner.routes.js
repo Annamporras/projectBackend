@@ -10,7 +10,6 @@ router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
     User
         .findById(_id)
         .then(user => {
-            console.log(req.session.currentUser, user)
             res.render(`partners/partner-profile`,
                 { user, isOwner: isOwner(req.session.currentUser._id, _id) })
 
