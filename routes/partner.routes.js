@@ -2,6 +2,7 @@ const router = require("express").Router()
 const fileUploader = require('../config/cloudinary.config');
 const { isLoggedIn } = require("../middleware/route-guard")
 const User = require('./../models/User.model')
+// const Event = require('./../models/Event.model')
 const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 
 
@@ -38,13 +39,6 @@ router.post('/perfil/editar/:_id', isLoggedIn, fileUploader.single('image'), (re
 
 })
 
-router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
-    User
-        .find()
-        .then(event => res.render('partners/created-events', { event, isOwner: isOwner(req.session.currentUser._id) }))
-        .catch(err => next(err))
-
-})
 
 module.exports = router
