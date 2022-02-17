@@ -15,7 +15,7 @@
         <br>
         <h5> Ciudad: {{evento.address.city}} </h5>
         <br>
-        <img class='imagen evento' src="{{evento.image}}" alt="imagen del evento"></img>
+        <img class='imagenEvento' src="{{evento.image}}" alt="imagen del evento"></img>
         <h5> descripcion {{evento.description}} </h5>
 
         {{#each comments}}
@@ -27,7 +27,7 @@
         {{!-- {{if isOwn}} --}}
 
 
-        <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-6">Editar</a>
+        <a href="/eventos/editar/{{evento._id}}" class="btn btn-danger d-grid gap-2 col-3">Editar</a>
         <form action="/eventos/{{evento._id}}/delete" method="POST">
             <button type="submit" class="btn btn-dark d-grid gap-2 col-6">Borrar evento</button>
         </form>
@@ -67,10 +67,10 @@
         </form>
     </center>
 
-    {{!-- <a href="javascript:clickLink();"> asistiré</a>
-    <p>Clicks <span id="clicks">0</span></p>
-    <a href="javascript:Reset();">Reset</a> --}}
-
+    <div class="d-none"> 
+        <input value="{{evento.address.location.coordinates.[0]}}">
+         <input value="{{evento.address.location.coordinates.[1]}}">
+    </div>
     <div>
         <figure id="myMap">
     </div>
