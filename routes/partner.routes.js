@@ -30,11 +30,11 @@ router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
 
 router.post('/perfil/editar/:_id', isLoggedIn, fileUploader.single('image'), (req, res, next) => {
     const { _id } = req.params
-    const { username, email } = req.body
+    const { username, email, websiteUrl } = req.body
 
     User
-        .findByIdAndUpdate(_id, { username, email, image: req.file?.path })
-        .then(() => res.redirect(`/perfil/${_id}`))
+        .findByIdAndUpdate(_id, { username, email, image: req.file?.path, websiteUrl }, { new: true })
+        .then(() => res.redirect(`/colaboradores/perfil/${_id}`))
         .catch(err => console.log(err))
 
 })

@@ -55,17 +55,17 @@ router.post('/crear', fileUploader.single('image'), (req, res, next) => {
 })
 
 //eventos editar 
-router.get('/editar/:id', isLoggedIn, (req, res, next) => {
-    const { id } = req.params
+router.get('/editar/:_id', isLoggedIn, (req, res, next) => {
+    const { _id } = req.params
 
     Event
-        .findById(id)
-        .then(evento => res.render('event/event-edit-form', evento, {user, isOwner: isOwner(req.session.currentUser._id, _id)}))
+        .findById(_id)
+        .then(evento => res.render('event/event-edit-form', { evento, isOwner: isOwner(req.session.currentUser._id, _id) }))
         .catch(err => console.log(err))
 })
 
-router.post('/editar/:id', isLoggedIn, fileUploader.single('image'), (req, res, next) => {
-    const { id } = req.params
+router.post('/editar/:_id', isLoggedIn, fileUploader.single('image'), (req, res, next) => {
+    const { _id } = req.params
     const { name, date, description, participants, comments, streetName, streetNumber, postCode, city, lat, lng } = req.body;
     const address = {
 
@@ -83,7 +83,7 @@ router.post('/editar/:id', isLoggedIn, fileUploader.single('image'), (req, res, 
     }
 
     Event
-        .findByIdAndUpdate(id, { name, date, description, participants, comments, image: req.file?.path, address })
+        .findByIdAndUpdate(_id, { name, date, description, participants, comments, image: req.file?.path, address })
         .then(() => res.redirect(`/eventos`))
         .catch(err => console.log(err))
 })
@@ -105,6 +105,7 @@ router.post('/:id/delete', isLoggedIn, (req, res, next) => {
 
 // ruta a los detalles del evento 
 
+
 router.get('/detalles/:event_id', (req, res) => {
     const { event_id } = req.params
 
@@ -115,8 +116,8 @@ router.get('/detalles/:event_id', (req, res) => {
         const evento = values[0]
         const comments = values[1]
 
-        res.render('event/event-details', { evento, comments },
-            isOwner(req.session.currentUser._id, evento.owner))
+        res.render('event/event-details', { evento, comments, isOwner: isOwner(req.session.currentUser._id, evento.owner) },
+        )
     })
         .catch(err => console.log(err))
 })

@@ -2,65 +2,70 @@
 
 <hr>
 
-            <form action="/eventos/editar/{{_id}}" method="POST" enctype="multipart/form-data">
-                <div class="mb-3">
-                    <label for="nameInput" class="form-label">Nombre del evento</label>
-                    <input type="text" class="form-control" id="nameInput" name="name" value="{{name}}" >
-                </div>
-                
-                <div class="mb-3">
-                    <label for="dateInput" class="form-label">Fecha del evento</label>
-                    <input type="date" class="form-control" id="dateInput" name="date" value="{{date}}">
-                </div>
-
-                 <div class="mb-3">
-                    <label for="streetNameInput" class="form-label"> nombre de la calle </label>
-                    <input type="text" class="form-control" id="streetNameInput" name="streetName" value="{{address.street.streetName}}">
-                </div>
-
-                 <div class="mb-3">
-                    <label for="streetNumberInput" class="form-label"> numero </label>
-                    <input type="number" class="form-control" id="streetNumberInput" name="streetNumber" value="{{address.street.streetNumber}}">
-                </div>
-
-                <div class="mb-3">
-                    <label for="postCodeInput" class="form-label"> codigo postal </label>
-                    <input type="number" class="form-control" id="postCodeInput" name="postCode" value="{{address.postCode}}">
-                </div>
-
-                 <div class="mb-3">
-                    <label for="cityInput" class="form-label"> Ciudad </label>
-                    <input type="text" class="form-control" id="cityInput" name="city" value="{{address.city}}">
-                </div>
-
-                 <div class="mb-3">
-                    <label for="latInput" class="form-label"> latitud </label>
-                    <input type="text" class="form-control" id="latInput" name="lat" value="{{address.location.coordinates.lat}}">
-                </div>
-
-                 <div class="mb-3">
-                    <label for="lngInput" class="form-label"> longitud </label>
-                    <input type="text" class="form-control" id="lngInput" name="lng" value="{{address.location.coordinates.lng}}">
-                </div>
-
-
-                 <div class="mb-3">
-                    <label for="descriptionInput" class="form-label"> descripcion del evento </label>
-                    <input type="text" class="form-control" id="descriptionInput" name="description" value="{{description}}">
-                </div>
-
-
-                <div class="mb-3">
-                    <label for="imageInput" class="form-label">imagen</label>
-                    <input type="file" class="form-control" id="imageInput" name="image" value="{{name}}">
-                </div>
-
-                <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-dark block"> modificar evento</button>
-                </div>
-
-            </form>
-        </div>
+<form action="/eventos/editar/{{evento._id}}" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label for="nameInput" class="form-label">Nombre del evento</label>
+        <input type="text" class="form-control" id="nameInput" name="name" value="{{evento.name}}">
     </div>
+
+    <div class="mb-3">
+        <label for="dateInput" class="form-label">Fecha del evento</label>
+        <input type="date" class="form-control" id="dateInput" name="date" value="{{evento.date}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="streetNameInput" class="form-label"> nombre de la calle </label>
+        <input type="text" class="form-control" id="streetNameInput" name="streetName"
+            value="{{evento.address.street.streetName}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="streetNumberInput" class="form-label"> numero </label>
+        <input type="number" class="form-control" id="streetNumberInput" name="streetNumber"
+            value="{{evento.address.street.streetNumber}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="postCodeInput" class="form-label"> codigo postal </label>
+        <input type="number" class="form-control" id="postCodeInput" name="postCode"
+            value="{{evento.address.postCode}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="cityInput" class="form-label"> Ciudad </label>
+        <input type="text" class="form-control" id="cityInput" name="city" value="{{evento.address.city}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="latInput" class="form-label"> latitud </label>
+        <input type="text" class="form-control" id="latInput" name="lat"
+            value="{{evento.address.location.coordinates.lat}}">
+    </div>
+
+    <div class="mb-3">
+        <label for="lngInput" class="form-label"> longitud </label>
+        <input type="text" class="form-control" id="lngInput" name="lng"
+            value="{{evento.address.location.coordinates.lng}}">
+    </div>
+
+
+    <div class="mb-3">
+        <label for="descriptionInput" class="form-label"> descripcion del evento </label>
+        <input type="text" class="form-control" id="descriptionInput" name="description" value="{{evento.description}}">
+    </div>
+
+
+    <div class="mb-3">
+        <label for="imageInput" class="form-label">imagen</label>
+        <input type="file" class="form-control" id="imageInput" name="image" value="{{evento.image}}">
+    </div>
+
+    <div class="d-grid gap-2">
+        <button type="submit" class="btn btn-dark block"> modificar evento</button>
+    </div>
+
+</form>
+</div>
+</div>
 
 </div>
