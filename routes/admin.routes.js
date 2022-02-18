@@ -2,7 +2,7 @@ const router = require("express").Router()
 const fileUploader = require('../config/cloudinary.config');
 const { isLoggedIn } = require("../middleware/route-guard")
 const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
-const User = require('./../models/User.model')
+const User = require('../models/User.model')
 
 
 router.get('/', isLoggedIn, (req, res, next) => {
