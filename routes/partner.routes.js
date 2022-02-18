@@ -11,7 +11,7 @@ router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
     User
         .findById(_id)
         .then(user => {
-            res.render(`partners/partner-profile`,
+            res.render(`Partners/partner-profile`,
                 { user, isOwner: isOwner(req.session.currentUser._id, _id) })
 
         })
@@ -23,7 +23,7 @@ router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
 
     User
         .findById(_id)
-        .then(user => res.render('partners/edit-partner-profile', user))
+        .then(user => res.render('Partners/edit-partner-profile', user))
         .catch(error => next(error))
 })
 

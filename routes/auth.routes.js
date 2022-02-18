@@ -8,7 +8,7 @@ const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 
 // registro users
 router.get('/registro', (req, res, next) => {
-    res.render('auth/signup-form')
+    res.render('Auth/signup-form')
 })
 
 router.post('/registro', (req, res, next) => {
@@ -27,7 +27,7 @@ router.post('/registro', (req, res, next) => {
 //registro partners
 
 router.get('/colaboradores/registro', (req, res, next) => {
-    res.render('auth/partners-signup-form')
+    res.render('Auth/partners-signup-form')
 })
 
 router.post('/colaboradores/registro', (req, res, next) => {
@@ -48,7 +48,7 @@ router.post('/colaboradores/registro', (req, res, next) => {
 
 //  login 
 
-router.get('/inicio-sesion', (req, res, next) => res.render('auth/login-form'))
+router.get('/inicio-sesion', (req, res, next) => res.render('Auth/login-form'))
 
 
 // TODO redirect to user profile or partner profile (check roles)
@@ -60,7 +60,7 @@ router.post('/inicio-sesion', (req, res, next) => {
 
 
     if (email.length === 0 || password.length === 0) {
-        res.render('auth/login-form', { errorMessage: 'Por favor, rellena todos los campos' })
+        res.render('Auth/login-form', { errorMessage: 'Por favor, rellena todos los campos' })
         return
     }
 
@@ -68,10 +68,10 @@ router.post('/inicio-sesion', (req, res, next) => {
         .findOne({ email })
         .then(user => {
             if (!user) {
-                res.render('auth/login-form', { errorMessage: 'Email no registrado en la Base de Datos' })
+                res.render('Auth/login-form', { errorMessage: 'Email no registrado en la Base de Datos' })
                 return
             } else if (bcryptjs.compareSync(password, user.password) === false) {
-                res.render('auth/login-form', { errorMessage: 'La contraseña es incorrecta' })
+                res.render('Auth/login-form', { errorMessage: 'La contraseña es incorrecta' })
                 return
 
 

@@ -10,7 +10,7 @@ router.get('/', isLoggedIn, (req, res, next) => {
     if (req.session.currentUser.role === 'ADMIN') {
         res.render('Admin/admin-home')
     } else {
-        res.render('auth/login-form', { errorMessage: 'Espacio no autorizado' })
+        res.render('Auth/login-form', { errorMessage: 'Espacio no autorizado' })
     }
 })
 

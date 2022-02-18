@@ -14,7 +14,7 @@ router.get('/perfil-usuario/:_id', isLoggedIn, (req, res, next) => {
     User
         .findById(_id)
         .then(user => {
-            res.render(`users/user-profile`, {
+            res.render(`Users/user-profile`, {
                 user,
                 isUser: isUser(req.session.currentUser),
                 isOwner: isOwner(req.session.currentUser._id, _id),
@@ -29,7 +29,7 @@ router.get('/perfil-usuario/editar/:_id', isLoggedIn, (req, res, next) => {
 
     User
         .findById(_id)
-        .then(user => res.render('users/edit-user-profile', user))
+        .then(user => res.render('Users/edit-user-profile', user))
         .catch(error => next(error))
 
 })
@@ -49,7 +49,7 @@ router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
     User
         .find()
-        .then(() => res.render('users/assists-list'))
+        .then(() => res.render('Users/assists-list'))
         .catch(err => next(err))
 
 })

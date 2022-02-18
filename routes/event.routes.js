@@ -167,7 +167,7 @@ router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
     Event
         .find({ owner: req.session.currentUser._id })
         .then(filteredEvents => {
-            res.render('partners/created-events', { filteredEvents })
+            res.render('Partners/created-events', { filteredEvents })
         })
         .catch(err => console.log(err))
 })
