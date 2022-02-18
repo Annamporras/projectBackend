@@ -119,7 +119,7 @@ router.get('/detalles/:event_id', (req, res) => {
         let counter = evento.participants.length
 
         res.render('event/event-details', {
-            evento, comments,
+            evento, comments, counter,
             isOwner: isOwner(req.session.currentUser._id, evento.owner),
             isUser: isUser(req.session.currentUser),
             isPartner: isPartner(req.session.currentUser)
