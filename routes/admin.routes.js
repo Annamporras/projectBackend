@@ -32,5 +32,13 @@ router.get('/usuarios', isLoggedIn, (req, res, next) => {
         .catch(err => next(err))
 })
 
+router.post('/usuarios/delete/:_id', isLoggedIn, (req, res, next) => {
+    const { _id } = req.params
+
+    User
+        .findByIdAndDelete(_id)
+        .then(() => res.redirect('/admin/usuarios'))
+        .catch(err => next(err))
+})
 
 module.exports = router
