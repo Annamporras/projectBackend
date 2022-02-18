@@ -12,7 +12,7 @@ const app = express();
 require("./config")(app);
 require('./config/session.config')(app)
 
-app.locals.appTitle = `Backend Project`;
+app.locals.appTitle = `A TODA MECHA`;
 app.locals.currentUserLogged
 
 // 👇 Start handling routes here
