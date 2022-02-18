@@ -1,6 +1,6 @@
 const router = require("express").Router()
 const bcryptjs = require('bcryptjs')
-const Event = require('../models/event.model')
+const Event = require('../models/Event.model')
 const Comment = require('../models/Comment.model')
 const fileUploader = require('../config/cloudinary.config')
 const { isLoggedIn } = require("../middleware/route-guard")
