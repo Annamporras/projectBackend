@@ -7,4 +7,3 @@ module.exports = app => {
   app.use('/colaboradores', require('./partner.routes'))
   app.use('/admin', require('./admin.routes'))
 }
-

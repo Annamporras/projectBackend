@@ -21,7 +21,6 @@ router.get('/colaboradores', isLoggedIn, (req, res, next) => {
         .find()
         .then(user => res.render('Admin/partners-list', { user }))
         .catch(err => next(err))
-
 })
 
 router.get('/usuarios', isLoggedIn, (req, res, next) => {

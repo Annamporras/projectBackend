@@ -11,7 +11,6 @@ const { isOwner, isAdmin, isPartner, isUser, formatDate } = require("../utils")
 router.get('/perfil-usuario/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
 
-
     User
         .findById(_id)
         .then(user => {

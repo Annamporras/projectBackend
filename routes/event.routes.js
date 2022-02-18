@@ -113,18 +113,18 @@ router.get('/detalles/:event_id', (req, res) => {
     const EventPromise = Event.findById(event_id).populate('participants', 'comments')
     const CommentPromise = Comment.find({ event: event_id })
 
-    Promise.all([EventPromise, CommentPromise]).then(values => {
-        const evento = values[0]
-        const comments = values[1]
-        let counter = evento.participants.length
+    Promise.all([EventPromise, CommentPromise])
+        .then(([evento, comments]) => {
 
-        res.render('event/event-details', {
-            evento, comments, counter,
-            isOwner: isOwner(req.session.currentUser._id, evento.owner),
-            isUser: isUser(req.session.currentUser),
-            isPartner: isPartner(req.session.currentUser._id)
+            let counter = evento.participants.length
+
+            res.render('event/event-details', {
+                evento, comments, counter,
+                isOwner: isOwner(req.session.currentUser._id, evento.owner),
+                isUser: isUser(req.session.currentUser),
+                isPartner: isPartner(req.session.currentUser)
+            })
         })
-    })
         .catch(err => next(err))
 })
 
@@ -132,20 +132,21 @@ router.get('/detalles/:event_id', (req, res) => {
 
 // routa post para el comentario 
 
-router.post('/detalles/:event_id/comments', isLoggedIn, (req, res) => {
+router.post('/detalles/:event_id/comments', isLoggedIn, (req, res, next) => {
     const { event_id } = req.params
 
     const { text } = req.body
 
-    Comment.create({ text, event: event_id, owner: req.session.currentUser._id })
+    Comment
+        .create({ text, event: event_id, owner: req.session.currentUser._id })
         .then(() => res.redirect(`/eventos/detalles/${event_id}`))
-
+        .catch(err => next(err))
 })
 
 
 // routa post para asistir al evento 
 
-router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
+router.post('/detalles/:event_id/participants', isLoggedIn, (req, res, next) => {
     const { event_id } = req.params
     const participant = req.session.currentUser._id
 
@@ -157,24 +158,18 @@ router.post('/detalles/:event_id/participants', isLoggedIn, (req, res) => {
         )
         //TODO add participant counter, send event to view detalles evento
         .then(event => { res.redirect(`/eventos/detalles/${event_id}`) })
-
+        .catch(err => next(err))
 
 })
 
 router.get('/mis-eventos', isLoggedIn, (req, res, next) => {
 
     Event
-        .find()
-        .then(events => {
-            let filteredEvents = events.filter(event => event.owner == req.session.currentUser._id)
-            console.log(filteredEvents);
+        .find({ owner: req.session.currentUser._id })
+        .then(filteredEvents => {
             res.render('partners/created-events', { filteredEvents })
-
         })
         .catch(err => console.log(err))
-
 })
-
-
 
 module.exports = router

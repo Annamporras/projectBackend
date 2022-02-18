@@ -21,11 +21,12 @@
 
 
             {{#if isPartner}}
+            {{#if isOwner}}
             <a href="/eventos/editar/{{evento._id}}" class="btn btn-outline-danger d-grid gap-2 col-6">Editar</a>
             <form action="/eventos/{{evento._id}}/delete" method="POST">
                 <button type="submit" class="btn btn-outline-dark d-grid gap-2 col-6">Borrar evento</button>
             </form>
-
+            {{/if}}
             {{/if}}
         </div>
 

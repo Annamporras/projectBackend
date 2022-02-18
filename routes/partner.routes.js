@@ -17,6 +17,7 @@ router.get('/perfil/:_id', isLoggedIn, (req, res, next) => {
         })
         .catch(err => next(err))
 })
+
 router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
     const { _id } = req.params
 
@@ -24,7 +25,6 @@ router.get('/perfil/editar/:_id', isLoggedIn, (req, res, next) => {
         .findById(_id)
         .then(user => res.render('partners/edit-partner-profile', user))
         .catch(error => next(error))
-
 })
 
 
@@ -36,7 +36,6 @@ router.post('/perfil/editar/:_id', isLoggedIn, fileUploader.single('image'), (re
         .findByIdAndUpdate(_id, { username, email, image: req.file?.path, websiteUrl }, { new: true })
         .then(() => res.redirect(`/colaboradores/perfil/${_id}`))
         .catch(err => console.log(err))
-
 })
 
 

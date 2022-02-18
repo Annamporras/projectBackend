@@ -82,6 +82,7 @@ router.post('/inicio-sesion', (req, res, next) => {
                 if (req.session.currentUser.role === 'ADMIN') {
 
                     res.app.locals.currentUserLogged = req.session.currentUser
+                    res.app.locals.isLoggedIn = true
                     res.redirect(`/admin`)
                 } else {
                     res.app.locals.currentUserLogged = req.session.currentUser
@@ -106,6 +107,8 @@ router.post('/inicio-sesion', (req, res, next) => {
 
 //cerrar cesion 
 router.post('/cerrar-sesion', (req, res) => {
+    res.app.locals.currentUserLogged = undefined
+    res.app.locals.isLoggedIn = false
     req.session.destroy(() => res.redirect('/inicio-sesion'))
 })
 

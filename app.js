@@ -1,8 +1,6 @@
-
 require("dotenv/config");
 
 require("./db");
-
 
 const express = require("express");
 const hbs = require("hbs");
@@ -12,14 +10,12 @@ const app = express();
 require("./config")(app);
 require('./config/session.config')(app)
 
-app.locals.appTitle = `A TODA MECHA`;
+app.locals.appTitle = `CulturEvent`;
 app.locals.currentUserLogged
+app.locals.isLoggedIn = false
 
-// 👇 Start handling routes here
 require('./routes')(app)
 
-
-// ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
 module.exports = app;
