@@ -1,6 +1,6 @@
 # Cultur-Event
 
-# Description:
+## Description:
 Cultur_Event is the second project of the Ironhack Web Development Bootcamp. A project that has been done by four hands by Angela Rueda and Anna Ma Porras. 
 The project is a tool for cultural venues such as theatres, museums, concert halls, libraries and others to promote their events. 
 Users will be able to see the events and sign up to attend them and comment their experiences.
@@ -9,23 +9,23 @@ In this project there are 3 profile modalities:
 2. Collaborator: these are the cultural spaces that can see all the events on the site and create, modify and delete their own events. They can also modify their profile.
 3. User: is the end user who can see all the events and sign up for any of them to attend. They can also modify their profile.
 
-# Deployed version:
+## Deployed version:
 You can have a look on: https://cultur-event.herokuapp.com/
 
-# Used Technologies:
+## Used Technologies:
 - NodeJs / Express / Mongoose to create all application with different endpoints grouped into different routes.
 - Handlebars to render all pages and views. Conditional rendering applied to show the different possible actions according to the profile.
 - Cloudinary to upload pictures.
 - Maps-Google-API to locate the events on the map.
 - MongoDBAtlas to update our data and share it between us.
 
-# Scalabilities:
+## Scalabilities:
 - Events  & Users ordened list for Admin profile. 
 - Filter to search an event or city more easily.
 - To outline the ability to leave comments on events.
 
 
-# Endpoints
+## Endpoints
 
 | HTTP METHOD	| URL    	| DESCRIPTION                                    	| PROTECTED 	|
 |-------------	|---------------	|------------------------------------------------	|---------	|
