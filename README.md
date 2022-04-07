@@ -1,6 +1,31 @@
-# Project Backend
+# Cultur-Event
 
-A brief description of what this project does and who it's for
+# Description:
+Cultur_Event is the second project of the Ironhack Web Development Bootcamp. A project that has been done by four hands by Angela Rueda and Anna Ma Porras. 
+The project is a tool for cultural venues such as theatres, museums, concert halls, libraries and others to promote their events. 
+Users will be able to see the events and sign up to attend them and comment their experiences.
+In this project there are 3 profile modalities:
+1. Admin: controls all the cultural spaces and all the users. You can view, create, modify and delete any user.
+2. Collaborator: these are the cultural spaces that can see all the events on the site and create, modify and delete their own events. They can also modify their profile.
+3. User: is the end user who can see all the events and sign up for any of them to attend. They can also modify their profile.
+
+# Deployed version:
+You can have a look on: https://cultur-event.herokuapp.com/
+
+# Used Technologies:
+- NodeJs / Express / Mongoose to create all application with different endpoints grouped into different routes.
+- Handlebars to render all pages and views. Conditional rendering applied to show the different possible actions according to the profile.
+- Cloudinary to upload pictures.
+- Maps-Google-API to locate the events on the map.
+- MongoDBAtlas to update our data and share it between us.
+
+# Scalabilities:
+- Events  & Users ordened list for Admin profile. 
+- Filter to search an event or city more easily.
+- To outline the ability to leave comments on events.
+
+
+# Endpoints
 
 | HTTP METHOD	| URL    	| DESCRIPTION                                    	| PROTECTED 	|
 |-------------	|---------------	|------------------------------------------------	|---------	|
@@ -31,6 +56,5 @@ A brief description of what this project does and who it's for
 | POST         	| `/perfil-usuario/:id/editar`             	| The edited information goes to DataBase            	|X |
 | GET         	| `/mis-eventos`    	|Displays the users events list      	|X |
 | GET       	| `/admin` 	|Home page of Admin role 	| X|
-| GET        	| `/admin/colaboradores` 	| It shows a partners list 	|X |
-| GET        	| `/admin/usuarios` 	| It shows a users list 	|X |
+| GET        	| `/admin/usuarios` 	| It shows a users and partners list 	|X |
 
